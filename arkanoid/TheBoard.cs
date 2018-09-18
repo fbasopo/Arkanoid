@@ -55,8 +55,10 @@ namespace arkanoid
         {
             if (p.Y >= Canvas.GetTop(img) && q.Y >= Canvas.GetTop(img))  // if the ball hits the top and bottom of the canvas
             {
+                double a = Canvas.GetLeft(img);
+                double b = a + img.ActualWidth;
                 if (p.X >= Canvas.GetLeft(img) && p.X <= (Canvas.GetLeft(img) + img.ActualWidth) ||  q.X > Canvas.GetLeft(img) + img.ActualWidth )  //this if statement to know when to bounce off the board
-                {     
+                {
                     return true;
                 }
             }
