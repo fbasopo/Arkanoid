@@ -33,7 +33,7 @@ namespace arkanoid
         Ball theBall;
         TheBoard board;
         Game theGame;
-        
+        List<Brick> bricks;
         public MainWindow()
         {
             //playground = new Canvas();
@@ -44,6 +44,11 @@ namespace arkanoid
             theBall = new Ball(ball);
             board = new TheBoard(paddle);
             theGame = new Game(board, theBall);
+            bricks = new List<Brick>();
+            bricks.Add(new Brick(canvas, new Point(0, 30)));
+            bricks.Add(new Brick(canvas, new Point(45, 30)));
+            bricks.Add(new Brick(canvas, new Point(90, 30)));
+            //brick = new Brick(brick1, brick2, brick3);
             //Point p = Mouse.GetPosition(canvas);
 
         }

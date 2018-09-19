@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Brick.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="TheBoard.cs" />
     <Page Include="MainWindow.xaml">
@@ -107,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Over1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Brick 1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
