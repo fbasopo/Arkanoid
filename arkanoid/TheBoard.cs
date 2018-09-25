@@ -25,15 +25,6 @@ namespace arkanoid
         bool activate = false;    // initialise the activate of the mouse
         Point point;
         
-        //private void paddle_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    if (activate)             // if activated
-        //    {
-        //        double left = Canvas.GetLeft(img) + Mouse.GetPosition(img).X - point.X; // get the position of the img relative to the canvas and add it to the position of the mouse with the image
-        //        Canvas.SetLeft(img, left); // move the mouse horizontally
-        //    }
-        //}
-
         public void Activate()
         {
             activate = true;
@@ -53,16 +44,24 @@ namespace arkanoid
         }
         public bool IntersectsWith(Point p, Point q)
         {
-            if (p.Y >= Canvas.GetTop(img) && q.Y >= Canvas.GetTop(img))  // if the ball hits the top and bottom of the canvas
+            if (p.Y >= Canvas.GetTop(img) && q.Y >= Canvas.GetTop(img))  
             {
                 double a = Canvas.GetLeft(img);
                 double b = a + img.ActualWidth;
-                if (p.X >= Canvas.GetLeft(img) && p.X <= (Canvas.GetLeft(img) + img.ActualWidth) ||  q.X > Canvas.GetLeft(img) + img.ActualWidth )  //this if statement to know when to bounce off the board
+                if (q.X >= a && p.X <= b )  //this if statement to know when to bounce off the board
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        public Point Position()
+        {
+            Point f = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
+            //Ball.bounce(f);
+            return f;
+
         }
     }
 }

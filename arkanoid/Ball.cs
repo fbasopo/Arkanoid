@@ -8,8 +8,8 @@ namespace arkanoid
     class Ball
     {
         //Game theGame;
-        double velX = 15, velY = 15;   // initialised velocities for the ball
-        Image img;      
+        double velX = 1, velY = 1;   // initialised velocities for the ball
+        Image img;
         
         // img represents the ball
         //This is to check whether the ball is within the canvas
@@ -18,30 +18,29 @@ namespace arkanoid
         {
             //Ball Nball = new Ball();
             double ballX = Canvas.GetLeft(img) + velX;  // it is to move the ball to the horizontal
-            Canvas.SetLeft(img, ballX + 1);
+            Canvas.SetLeft(img, ballX);
             if(ballX < 0 || ballX + img.ActualWidth > canvasP.ActualWidth && velX > 0) // if the ball hits the canvas 
             {
                 velX = -velX;                                                          // chang ethe direction
             }
         }
 
-        public Point GetPositionY()
+        public Point GetPosition2()
         {
-            Point ballS = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img));
+            Point ballS = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img) + img.ActualHeight);
             return ballS;
         }
 
         public Point GetPosition()
         {
-
-            Point ballY = new Point((Canvas.GetLeft(img)), Canvas.GetTop(img));
+            Point ballY = new Point((Canvas.GetLeft(img)), Canvas.GetTop(img) + img.ActualHeight);
             return ballY;
         }
 
         private void moveY(Canvas canvasP)
         {
             double ballY = Canvas.GetTop(img) + velY;   // get the position and move it velY up
-            Canvas.SetTop(img, ballY + 1);              // move the ball up
+            Canvas.SetTop(img, ballY);              // move the ball up
             if(ballY < 0)   // if the ball hits the top and bottom of the canvas
             {
                 velY = -velY;                // change the direction
@@ -70,6 +69,8 @@ namespace arkanoid
 
         public void bounce()
         {
+            //Point a = TheBoard.Position();
+            //Canvas.SetTop(a+  img.ActualWidth - 1);
             velY = -velY;
         }
        

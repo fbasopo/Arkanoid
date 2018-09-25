@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using ThinkLib;
 using System.IO;
 
 
@@ -38,7 +37,7 @@ namespace arkanoid
         {
             //playground = new Canvas();
             InitializeComponent();
-            theTimer.Interval = TimeSpan.FromMilliseconds(100);
+            theTimer.Interval = TimeSpan.FromMilliseconds(10);
             theTimer.Tick += dispatcherTimer_Tick;
             theTimer.IsEnabled = true;
             theBall = new Ball(ball);
@@ -59,7 +58,7 @@ namespace arkanoid
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             theBall.update(canvas);                          // 
-            int num = theGame.checkcollision();       // calls the method in the ball class to make the ball bounce
+            theGame.checkcollision();       // calls the method in the ball class to make the ball bounce
             // if it reaches the bottom of the canvas, display the image and stop
             if (theBall.LeavesArea(canvas))
             {
