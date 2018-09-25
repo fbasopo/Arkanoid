@@ -17,9 +17,10 @@ namespace arkanoid
             //theGame.Bounce( canvas, board);
             Point ballpos = ball.GetPosition();
             Point balYps = ball.GetPosition2();
+            
             if (board.IntersectsWith(ballpos, balYps))
             {
-                ball.bounce();
+                ball.bounce(board.Position());
                 
             }
             

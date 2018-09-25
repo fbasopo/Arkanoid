@@ -67,10 +67,9 @@ namespace arkanoid
             return false;
         }
 
-        public void bounce()
+        public void bounce(Point p)
         {
-            //Point a = TheBoard.Position();
-            //Canvas.SetTop(a+  img.ActualWidth - 1);
+            Canvas.SetTop(img, p.Y - img.ActualWidth - 1);
             velY = -velY;
         }
        
