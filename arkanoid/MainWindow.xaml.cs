@@ -47,6 +47,7 @@ namespace arkanoid
             bricks.Add(new Brick(canvas, new Point(0, 30)));
             bricks.Add(new Brick(canvas, new Point(45, 30)));
             bricks.Add(new Brick(canvas, new Point(90, 30)));
+            bricks.Add(new Brick(canvas, new Point(135, 30)));
             //brick = new Brick(brick1, brick2, brick3);
             //Point p = Mouse.GetPosition(canvas);
 
