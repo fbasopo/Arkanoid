@@ -25,6 +25,13 @@ namespace arkanoid
             }
         }
 
+        public Point Intersection()
+        {
+            Point bbl = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
+
+            return bbl;
+        }
+
         public Point GetPosition2()
         {
             Point ballS = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img) + img.ActualHeight);
@@ -72,6 +79,7 @@ namespace arkanoid
             Canvas.SetTop(img, p.Y - img.ActualWidth - 1);
             velY = -velY;
         }
+       
        
     }
 

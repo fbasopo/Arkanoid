@@ -42,14 +42,45 @@ namespace arkanoid
             theTimer.IsEnabled = true;
             theBall = new Ball(ball);
             board = new TheBoard(paddle);
-            theGame = new Game(board, theBall);
+            theGame = new Game(board, theBall, bricks);
             bricks = new List<Brick>();
-            bricks.Add(new Brick(canvas, new Point(0, 30)));
-            bricks.Add(new Brick(canvas, new Point(45, 30)));
-            bricks.Add(new Brick(canvas, new Point(90, 30)));
-            bricks.Add(new Brick(canvas, new Point(135, 30)));
+           
+            //bricks.Add(new Brick(canvas, new Point(0, 30)));
+            //bricks.Add(new Brick(canvas, new Point(45, 30)));
+            //bricks.Add(new Brick(canvas, new Point(90, 30)));
+            //bricks.Add(new Brick(canvas, new Point(135, 30)));
             //brick = new Brick(brick1, brick2, brick3);
             //Point p = Mouse.GetPosition(canvas);
+            makeBricks(10);
+        }
+        public void brickcollision()
+        {
+            foreach (Brick b in bricks)
+            {
+                Point posball = theBall.GetPosition();
+                Point posbal = theBall.GetPosition2();
+                Point posbrck = b.getposition();
+                Point posbrk = b.getposition2();
+                if (posbrck.Y >= posball.Y)
+                {
+                    if (posbrck.X <= posball.X && posbrk.X >= posbal.X)
+                    {
+                        theBall.bounce(posbrck);
+                        
+                    }
+                }
+            }
+        }
+        public void makeBricks(int number) 
+        {
+
+            int row = 0;
+            int col = 30;
+            for (int i = 0; i < number; i++)
+            {
+                bricks.Add(new Brick(canvas, new Point(row, col)));
+                row += 45;
+            }
 
         }
         public void stop()                  // the method to stop the timer
@@ -67,6 +98,8 @@ namespace arkanoid
                 Over.Source = OverImages[0];
                 stop();
             }
+            brickcollision();
+            //theGame.Brickcollision(canvas, bricks);
         } // dispatcherTimer_Tick
 
         private void paddle_MouseDown(object sender, MouseButtonEventArgs e)
@@ -78,6 +111,8 @@ namespace arkanoid
         {
             board.move();               // moves the board
         }
+
+
     }//class Mainwindow
 }
     
