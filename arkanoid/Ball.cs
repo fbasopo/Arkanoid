@@ -32,15 +32,24 @@ namespace arkanoid
             return bbl;
         }
 
-        public Point GetPosition2()
+        public Point BottomRight()
         {
             Point ballS = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img) + img.ActualHeight);
             return ballS;
         }
 
-        public Point GetPosition()
-        {
-            Point ballY = new Point((Canvas.GetLeft(img)), Canvas.GetTop(img) + img.ActualHeight);
+        public Point BottomLeft() {
+            Point ballY = new Point(Canvas.GetLeft(img), Canvas.GetTop(img) + img.ActualHeight);
+            return ballY;
+        }
+
+        public Point TopLeft() {
+            Point ballY = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
+            return ballY;
+        }
+
+        public Point TopRight() {
+            Point ballY = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img));
             return ballY;
         }
 
@@ -63,6 +72,11 @@ namespace arkanoid
         {
             moveX(canvas);                    //method in the ball class to move the ball horizontally
             moveY(canvas);                    //method in the ball class to movethe ball vertically
+        }
+
+        internal void ReverseCourse() {
+            velX = velX * -1;
+            velY *= -1;
         }
 
         public bool LeavesArea(Canvas canvas)

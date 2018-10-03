@@ -53,14 +53,34 @@ namespace arkanoid
             //Point p = Mouse.GetPosition(canvas);
             makeBricks(10);
         }
+
+        private bool BrickPointCollision(Point p, Point topLeft, Point bottomRight) {
+            return p.X >= topLeft.X && p.X <= bottomRight.X && p.Y <= bottomRight.Y && p.Y >= topLeft.Y;
+        }
+
         public void brickcollision()
         {
+            List<Point> ballPoints = new List<Point>();
+            ballPoints.Add(theBall.TopLeft());
+            ballPoints.Add(theBall.BottomRight());
+            ballPoints.Add(theBall.BottomLeft());
+            ballPoints.Add(theBall.TopRight());
+            Brick intersected = null;
             foreach (Brick b in bricks)
             {
-                Point posball = theBall.GetPosition();
-                Point posbal = theBall.GetPosition2();
-                Point posbrck = b.getposition();
-                Point posbrk = b.getposition2();
+                foreach (Point p in ballPoints) {
+                    if (BrickPointCollision(p, b.TopLeft(), b.BottomRight())) {
+                        intersected = b;
+                    }
+                }
+                if (intersected != null) {
+                    break;
+                }
+                /*
+                Point posball = theBall.BottomLeft();
+                Point posbal = theBall.BottomRight();
+                Point posbrck = b.TopLeft();
+                Point posbrk = b.TopRight();
                 if (posbrck.Y >= posball.Y)
                 {
                     if (posbrck.X <= posball.X && posbrk.X >= posbal.X)
@@ -69,9 +89,15 @@ namespace arkanoid
                         
                     }
                 }
+                */
             }
-        }
-        public void makeBricks(int number) 
+            if (intersected != null) {
+                theBall.ReverseCourse();
+                intersected.removebrick();
+                bricks.Remove(intersected);
+            }
+    }
+    public void makeBricks(int number) 
         {
 
             int row = 0;

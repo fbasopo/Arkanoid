@@ -29,19 +29,24 @@ namespace arkanoid
         //    canvas.Children.Remove(v);
         //}
 
-        public void removebrick(Brick brick)
+        public void removebrick()
         {
             canvas.Children.Remove(img);
         }
-        public Point getposition()
+        public Point TopLeft()
         {
             Point posbrick = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
             return posbrick;
         }
 
-        internal Point getposition2()
+        public Point TopRight()
         {
             Point posbrick = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img));
+            return posbrick;
+        }
+
+        public Point BottomRight() {
+            Point posbrick = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img) + img.ActualHeight);
             return posbrick;
         }
 
