@@ -24,7 +24,6 @@ namespace arkanoid
 
     public partial class MainWindow : Window
     {
-
         private BitmapImage[] OverImages;
         private string Location = "pack://application:,,,/";
         DispatcherTimer theTimer = new DispatcherTimer();
@@ -42,62 +41,13 @@ namespace arkanoid
             theTimer.IsEnabled = true;
             theBall = new Ball(ball);
             board = new TheBoard(paddle);
-            theGame = new Game(board, theBall, bricks);
             bricks = new List<Brick>();
-           
-            //bricks.Add(new Brick(canvas, new Point(0, 30)));
-            //bricks.Add(new Brick(canvas, new Point(45, 30)));
-            //bricks.Add(new Brick(canvas, new Point(90, 30)));
-            //bricks.Add(new Brick(canvas, new Point(135, 30)));
-            //brick = new Brick(brick1, brick2, brick3);
-            //Point p = Mouse.GetPosition(canvas);
-            makeBricks(10);
+            theGame = new Game(board, theBall, bricks);
+            double pad = canvas.ActualHeight - (paddle.ActualHeight + 20);
+            Canvas.SetBottom(paddle, pad);
+            makeBricks(10, 4);
         }
-
-        private bool BrickPointCollision(Point p, Point topLeft, Point bottomRight) {
-            return p.X >= topLeft.X && p.X <= bottomRight.X && p.Y <= bottomRight.Y && p.Y >= topLeft.Y;
-        }
-
-        public void brickcollision()
-        {
-            List<Point> ballPoints = new List<Point>();
-            ballPoints.Add(theBall.TopLeft());
-            ballPoints.Add(theBall.BottomRight());
-            ballPoints.Add(theBall.BottomLeft());
-            ballPoints.Add(theBall.TopRight());
-            Brick intersected = null;
-            foreach (Brick b in bricks)
-            {
-                foreach (Point p in ballPoints) {
-                    if (BrickPointCollision(p, b.TopLeft(), b.BottomRight())) {
-                        intersected = b;
-                    }
-                }
-                if (intersected != null) {
-                    break;
-                }
-                /*
-                Point posball = theBall.BottomLeft();
-                Point posbal = theBall.BottomRight();
-                Point posbrck = b.TopLeft();
-                Point posbrk = b.TopRight();
-                if (posbrck.Y >= posball.Y)
-                {
-                    if (posbrck.X <= posball.X && posbrk.X >= posbal.X)
-                    {
-                        theBall.bounce(posbrck);
-                        
-                    }
-                }
-                */
-            }
-            if (intersected != null) {
-                theBall.ReverseCourse();
-                intersected.removebrick();
-                bricks.Remove(intersected);
-            }
-    }
-    public void makeBricks(int number) 
+        public void makeBricks(int number, int colunm) 
         {
 
             int row = 0;
@@ -107,7 +57,21 @@ namespace arkanoid
                 bricks.Add(new Brick(canvas, new Point(row, col)));
                 row += 45;
             }
-
+            if(colunm > 1)
+            {
+                
+                row = 0;
+                for (int a = 1; a < colunm; a++)
+                {
+                    col += 40;
+                    for (int b = 0; b < number; b++)
+                    {
+                        bricks.Add(new Brick(canvas, new Point(row, col)));
+                        row += 45;
+                    }
+                    row = 0;
+                }
+            }
         }
         public void stop()                  // the method to stop the timer
         {
@@ -124,8 +88,7 @@ namespace arkanoid
                 Over.Source = OverImages[0];
                 stop();
             }
-            brickcollision();
-            //theGame.Brickcollision(canvas, bricks);
+            theGame.Brickcollision();
         } // dispatcherTimer_Tick
 
         private void paddle_MouseDown(object sender, MouseButtonEventArgs e)

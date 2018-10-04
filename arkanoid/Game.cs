@@ -17,8 +17,6 @@ namespace arkanoid
         //double velY = 15, velX = 15;
         public void checkcollision()
         {
-            //theGame = new Game(img);
-            //theGame.Bounce( canvas, board);
             Point ballpos = ball.BottomLeft();
             Point balYps = ball.BottomRight();
             
@@ -29,40 +27,48 @@ namespace arkanoid
             }
             
         }
-
-        public void  Brickcollision(Canvas canvas, List<Brick> brck) 
+        private bool BrickPointCollision(Point p, Point topLeft, Point bottomRight)
         {
-            //if (brick.getposition().Y == ball.Intersection().Y)
-            //{
-            //    //ball.Intersection();
-            //    brick.Remove();
-            //}
-            //foreach (UIElement b in canvas.Children)
-            //{
+            return p.X >= topLeft.X && p.X <= bottomRight.X && p.Y <= bottomRight.Y && p.Y >= topLeft.Y;
+        }
 
-            //    if ()
-            //    {
-
-            //        //ball.Intersection();
-            //        brick.Remove(b);
-            //    }
-
-            //}
-            
-            
-            //foreach(Brick b in brck)
-            //{
-            //    Point posball = ball.GetPosition();
-            //    Point posbrck = b.getposition();
-            //    if(posbrck.Y + 35 >= posball.Y - 25)
-            //    {
-            //        if(posbrck.X <= posball.X + 25 && posbrck.X + 35 >= posball.X)
-            //        {
-            //            //ball.bounce(posball);
-            //            brck.Remove(b);
-            //        }
-            //    }
-            //}
+        public void  Brickcollision() 
+        {
+            List<Point> ballPoints = new List<Point>();
+            ballPoints.Add(ball.TopLeft());
+            ballPoints.Add(ball.BottomRight());
+            ballPoints.Add(ball.BottomLeft());
+            ballPoints.Add(ball.TopRight());
+            Brick intersected = null;
+            foreach (Brick b in bricks)
+            {
+                foreach (Point p in ballPoints)
+                {
+                    if (BrickPointCollision(p, b.TopLeft(), b.BottomRight()))
+                    {
+                        intersected = b;
+                    }
+                }
+                if (intersected != null)
+                {
+                    break;
+                }
+            }
+            if (intersected != null)
+            {
+                if (intersected.CheckerForBrick())
+                {
+                    ball.ReverseCourse();
+                    intersected.replacebrick();
+                }
+                else
+                {
+                    ball.ReverseCourse();
+                    intersected.removebrick();
+                    bricks.Remove(intersected);
+                }
+            }
+           
         }
 
         public Game(TheBoard board, Ball ball, List<Brick> list)

@@ -28,7 +28,6 @@ namespace arkanoid
         public Point Intersection()
         {
             Point bbl = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
-
             return bbl;
         }
 

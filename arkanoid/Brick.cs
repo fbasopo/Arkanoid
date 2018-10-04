@@ -23,22 +23,30 @@ namespace arkanoid
             Canvas.SetLeft(img, position.X);
             canvas.Children.Add(img);
         }
-        //public void Remove(UIElement v)
-        //{
-        //    double m = getposition().Y;
-        //    canvas.Children.Remove(v);
-        //}
-
         public void removebrick()
         {
             canvas.Children.Remove(img);
+        }
+        public bool CheckerForBrick()
+        {
+            if ( img.Source.ToString() == "pack://application:,,,/Brick 1.jpg")
+            {
+                return true;
+            }
+            return false;
+        }
+        public void replacebrick()
+        {
+            canvas.Children.Remove(img);
+            img.Source = new BitmapImage(new System.Uri(Location + "cracked.png"));
+            canvas.Children.Add(img);
+            
         }
         public Point TopLeft()
         {
             Point posbrick = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
             return posbrick;
         }
-
         public Point TopRight()
         {
             Point posbrick = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img));
@@ -49,16 +57,6 @@ namespace arkanoid
             Point posbrick = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img) + img.ActualHeight);
             return posbrick;
         }
-
-        //public void draw( int number){
-        //    int row = 0;
-        //    int col = 30;
-        //    for(int i = 0; i < number; i++)
-        //    {
-        //        bricks.Add(new Brick(canvas, new Point(row, col)));
-        //        row += 45;
-        //    }
-        //}
     }
 }
     
