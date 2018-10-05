@@ -41,8 +41,7 @@ namespace arkanoid
             ballPoints.Add(ball.BottomLeft());
             ballPoints.Add(ball.TopRight());
             Brick intersected = null;
-            bool i = false;
-            bool a = false;
+            bool i = false; // has-hit-side-of-brick
             foreach (Brick b in bricks)
             {
                 foreach (Point p in ballPoints)
@@ -53,23 +52,11 @@ namespace arkanoid
                         intersected = b;
                         if (ball.TopLeft().X == b.TopRight().X || ball.TopRight().X == b.TopLeft().X)
                         {
-                            if(ball.TopLeft().Y <= b.BottomRight().Y && ball.BottomLeft().Y >= b.TopRight().Y)
+                            if(ball.TopLeft().Y < b.BottomRight().Y || ball.BottomLeft().Y > b.TopRight().Y)
                             {
                                 i = true;
                             }
                         }
-
-                        if (ball.BottomRight().Y == b.TopRight().Y || ball.TopRight().Y == b.BottomRight().Y)
-                        {
-                            if (ball.TopRight().X >= b.BottomLeft().X && ball.TopLeft().X <= b.BottomRight().X)
-                            {
-                                a = true;
-                            }
-                        }
-                        //if (ball.TopRight().Y == b.BottomRight().Y)
-                        //{
-
-                        //}
                     }
                 }
                 if (intersected != null)
@@ -79,49 +66,33 @@ namespace arkanoid
             }
             if (intersected != null)
             {
-                if (i)
+                if (i) // has-hit-brick-side
                 {
-                    if (intersected.CheckerForBrick())
+                    ball.ReverseX();
+                    if (intersected.CheckerForBrick()) // is-brick-cracked
                     {
-                        ball.ReverseX();
                         intersected.replacebrick();
                     }
                     else
                     {
-                        ball.ReverseX();
                         intersected.removebrick();
                         bricks.Remove(intersected);
                     }
                 }
-
-                if (a)
+                else
                 {
+                    ball.ReverseY();
                     if (intersected.CheckerForBrick())
                     {
-                        ball.ReverseY();
                         intersected.replacebrick();
                     }
                     else
                     {
-                        ball.ReverseY();
                         intersected.removebrick();
                         bricks.Remove(intersected);
                     }
                 }
-
-                //if (intersected.CheckerForBrick())
-                //{
-                //    ball.ReverseCourse();
-                //    intersected.replacebrick();
-                //}
-                //else
-                //{
-                //    ball.ReverseCourse();
-                //    intersected.removebrick();
-                //    bricks.Remove(intersected);
-                //}
             }
-           
         }
 
         public Game(TheBoard board, Ball ball, List<Brick> list)
