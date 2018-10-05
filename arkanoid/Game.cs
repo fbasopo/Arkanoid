@@ -27,10 +27,11 @@ namespace arkanoid
             }
             
         }
-        private bool BrickPointCollision(Point p, Point topLeft, Point bottomRight)
+        private bool BrickPointCollision(Point p, Point topLeft, Point bottomRight)  // for the top and bottom
         {
             return p.X >= topLeft.X && p.X <= bottomRight.X && p.Y <= bottomRight.Y && p.Y >= topLeft.Y;
         }
+        
 
         public void  Brickcollision() 
         {
@@ -40,13 +41,35 @@ namespace arkanoid
             ballPoints.Add(ball.BottomLeft());
             ballPoints.Add(ball.TopRight());
             Brick intersected = null;
+            bool i = false;
+            bool a = false;
             foreach (Brick b in bricks)
             {
                 foreach (Point p in ballPoints)
                 {
                     if (BrickPointCollision(p, b.TopLeft(), b.BottomRight()))
                     {
+                        
                         intersected = b;
+                        if (ball.TopLeft().X == b.TopRight().X || ball.TopRight().X == b.TopLeft().X)
+                        {
+                            if(ball.TopLeft().Y <= b.BottomRight().Y && ball.BottomLeft().Y >= b.TopRight().Y)
+                            {
+                                i = true;
+                            }
+                        }
+
+                        if (ball.BottomRight().Y == b.TopRight().Y || ball.TopRight().Y == b.BottomRight().Y)
+                        {
+                            if (ball.TopRight().X >= b.BottomLeft().X && ball.TopLeft().X <= b.BottomRight().X)
+                            {
+                                a = true;
+                            }
+                        }
+                        //if (ball.TopRight().Y == b.BottomRight().Y)
+                        //{
+
+                        //}
                     }
                 }
                 if (intersected != null)
@@ -56,17 +79,47 @@ namespace arkanoid
             }
             if (intersected != null)
             {
-                if (intersected.CheckerForBrick())
+                if (i)
                 {
-                    ball.ReverseCourse();
-                    intersected.replacebrick();
+                    if (intersected.CheckerForBrick())
+                    {
+                        ball.ReverseX();
+                        intersected.replacebrick();
+                    }
+                    else
+                    {
+                        ball.ReverseX();
+                        intersected.removebrick();
+                        bricks.Remove(intersected);
+                    }
                 }
-                else
+
+                if (a)
                 {
-                    ball.ReverseCourse();
-                    intersected.removebrick();
-                    bricks.Remove(intersected);
+                    if (intersected.CheckerForBrick())
+                    {
+                        ball.ReverseY();
+                        intersected.replacebrick();
+                    }
+                    else
+                    {
+                        ball.ReverseY();
+                        intersected.removebrick();
+                        bricks.Remove(intersected);
+                    }
                 }
+
+                //if (intersected.CheckerForBrick())
+                //{
+                //    ball.ReverseCourse();
+                //    intersected.replacebrick();
+                //}
+                //else
+                //{
+                //    ball.ReverseCourse();
+                //    intersected.removebrick();
+                //    bricks.Remove(intersected);
+                //}
             }
            
         }

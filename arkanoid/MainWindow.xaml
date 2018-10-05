@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:arkanoid"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-  <Grid>
-    <Canvas x:Name="canvas" Margin="10,10,10,10" Background="#FF4B6DCB">
-      <Image x:Name="ball" Height="25" Source="ball.png" Stretch="Fill" Width="25" Canvas.Top="123" Canvas.Left="131" RenderTransformOrigin="0.8,1.6"/>
-      <Image x:Name="paddle" Height="25" Source="paddle.png" Stretch="Fill" Width="100" Canvas.Top="247" MouseDown="paddle_MouseDown" MouseMove="paddle_MouseMove" Canvas.Left="194" RenderTransformOrigin="0.477,-0.281"/>
-      <Image x:Name="Over" Height="299" Width="497" RenderTransformOrigin="-0.089,0.551"/>
-    </Canvas>
+        Title="MainWindow" Height="350" Width="525" ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <Canvas x:Name="canvas" Margin="10,10,10,10" Background="#FF4B6DCB">
+            <Image x:Name="ball" Height="13" Source="ball.png" Stretch="Fill" Width="13" Canvas.Top="123" Canvas.Left="131" RenderTransformOrigin="0.8,1.6"/>
+            <Image x:Name="paddle" Height="19" Source="paddle.png" Stretch="Fill" Width="125" Canvas.Top="270" MouseDown="paddle_MouseDown" MouseMove="paddle_MouseMove" Canvas.Left="182" RenderTransformOrigin="0.477,-0.281"/>
+            <Image x:Name="Over" Height="299" Width="497" RenderTransformOrigin="-0.089,0.551" Stretch="UniformToFill"/>
+        </Canvas>
 
-  </Grid>
+    </Grid>
 </Window>

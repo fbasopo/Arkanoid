@@ -57,6 +57,11 @@ namespace arkanoid
             Point posbrick = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img) + img.ActualHeight);
             return posbrick;
         }
+        public Point BottomLeft()
+        {
+            Point posbrick = new Point(Canvas.GetLeft(img), Canvas.GetTop(img) + img.ActualHeight);
+            return posbrick;
+        }
     }
 }
     

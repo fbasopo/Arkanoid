@@ -73,11 +73,19 @@ namespace arkanoid
             moveY(canvas);                    //method in the ball class to movethe ball vertically
         }
 
-        internal void ReverseCourse() {
+        public void ReverseCourse() {
             velX = velX * -1;
             velY *= -1;
         }
+        public void ReverseX()
+        {
+            velX *= -1;
+        }
 
+        public void ReverseY()
+        {
+            velY *= -1;
+        }
         public bool LeavesArea(Canvas canvas)
         {
             if (Canvas.GetTop(img) + img.ActualHeight >= canvas.ActualHeight)
