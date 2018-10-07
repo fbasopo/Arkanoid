@@ -32,11 +32,12 @@ namespace arkanoid
             Mouse.Capture(img);                // the mouse must capture the position of the image
         }
 
-        public void move()
+        public void move(Canvas canvas)
         {
             if (activate)
             {
                 double left = Canvas.GetLeft(img) + Mouse.GetPosition(img).X - point.X;
+                if (left <= 0 || left + img.ActualWidth >= canvas.ActualWidth) return;
                 Canvas.SetLeft(img, left);
                 double x = Canvas.GetRight(img);
                 //point = Mouse.GetPosition(paddle);

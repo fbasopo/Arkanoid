@@ -98,7 +98,7 @@ namespace arkanoid
 
         private void paddle_MouseMove(object sender, MouseEventArgs e)
         {
-            board.move();               // moves the board
+            board.move(canvas);               // moves the board
         }
 
 
