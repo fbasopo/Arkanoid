@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.IO;
+using System.Media;
+using System.Windows.Resources;
+
+
 
 
 namespace arkanoid
@@ -47,6 +51,12 @@ namespace arkanoid
             Canvas.SetBottom(paddle, pad);
             makeBricks(10, 4);
         }
+        private void GameSound()
+        {
+            SoundPlayer sp = new SoundPlayer("C:\\temp\\music.wav");
+            sp.PlayLooping();
+        }
+        
         public void makeBricks(int number, int colunm) 
         {
 
@@ -90,7 +100,13 @@ namespace arkanoid
             }
             theGame.Brickcollision();
         } // dispatcherTimer_Tick
-
+        private void makeBounceSound()
+        {
+            Uri pathToFile = new Uri("pack://application:,,,/bounce.wav");
+            StreamResourceInfo strm = Application.GetResourceStream(pathToFile);
+            SoundPlayer sp = new SoundPlayer(strm.Stream);
+            sp.Play();
+        }
         private void paddle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             board.Activate();                   // actives the board with the mouse
