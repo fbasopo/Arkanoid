@@ -36,10 +36,15 @@ namespace arkanoid
         TheBoard board;
         Game theGame;
         List<Brick> bricks;
+        SoundPlayer sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\music.wav");
+        
         public MainWindow()
         {
             //playground = new Canvas();
             InitializeComponent();
+            //GameSound();
+            //SoundPlayer sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\music.wav");
+            sp.PlayLooping();
             theTimer.Interval = TimeSpan.FromMilliseconds(10);
             theTimer.Tick += dispatcherTimer_Tick;
             theTimer.IsEnabled = true;
@@ -49,37 +54,38 @@ namespace arkanoid
             theGame = new Game(board, theBall, bricks);
             double pad = canvas.ActualHeight - (paddle.ActualHeight + 20);
             Canvas.SetBottom(paddle, pad);
-            makeBricks(10, 4);
+            makeBricks(13, 4);
+            
         }
-        private void GameSound()
-        {
-            SoundPlayer sp = new SoundPlayer("C:\\temp\\music.wav");
-            sp.PlayLooping();
-        }
+
+        //private void GameSound()
+        //{
+           
+        //}
         
         public void makeBricks(int number, int colunm) 
         {
 
-            int row = 0;
+            int row = 10;
             int col = 30;
             for (int i = 0; i < number; i++)
             {
                 bricks.Add(new Brick(canvas, new Point(row, col)));
-                row += 45;
+                row += 60;
             }
             if(colunm > 1)
             {
                 
-                row = 0;
+                row = 10;
                 for (int a = 1; a < colunm; a++)
                 {
                     col += 40;
                     for (int b = 0; b < number; b++)
                     {
                         bricks.Add(new Brick(canvas, new Point(row, col)));
-                        row += 45;
+                        row += 60;
                     }
-                    row = 0;
+                    row = 10;
                 }
             }
         }
@@ -89,6 +95,7 @@ namespace arkanoid
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            //GameSound();
             theBall.update(canvas);                          // 
             theGame.checkcollision();       // calls the method in the ball class to make the ball bounce
             // if it reaches the bottom of the canvas, display the image and stop
@@ -97,16 +104,18 @@ namespace arkanoid
                 OverImages = new BitmapImage[] { new BitmapImage(new Uri(Location + "Over1.png")) };
                 Over.Source = OverImages[0];
                 stop();
+                sp.Stop();
             }
             theGame.Brickcollision();
+            
         } // dispatcherTimer_Tick
-        private void makeBounceSound()
-        {
-            Uri pathToFile = new Uri("pack://application:,,,/bounce.wav");
-            StreamResourceInfo strm = Application.GetResourceStream(pathToFile);
-            SoundPlayer sp = new SoundPlayer(strm.Stream);
-            sp.Play();
-        }
+        //private void makeBounceSound()
+        //{
+        //    Uri pathToFile = new Uri("pack://application:,,,/bounce.wav");
+        //    StreamResourceInfo strm = Application.GetResourceStream(pathToFile);
+        //    SoundPlayer sp = new SoundPlayer(strm.Stream);
+        //    sp.Play();
+        //}
         private void paddle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             board.Activate();                   // actives the board with the mouse

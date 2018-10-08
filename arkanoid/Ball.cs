@@ -24,7 +24,6 @@ namespace arkanoid
                 velX = -velX;                                                          // chang ethe direction
             }
         }
-
         public Point Intersection()
         {
             Point bbl = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
@@ -99,7 +98,9 @@ namespace arkanoid
         {
             Canvas.SetTop(img, p.Y - img.ActualWidth - 1);
             velY = -velY;
+
         }
+
        
        
     }

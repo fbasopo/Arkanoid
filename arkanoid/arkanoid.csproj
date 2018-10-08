@@ -59,6 +59,12 @@
     </ApplicationDefinition>
     <Compile Include="Brick.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Properties\Menu Bar.xaml.cs">
+      <DependentUpon>Menu Bar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TheBoard.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -73,6 +79,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Properties\Menu Bar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Properties\Welcome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -117,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="background1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Welcome2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

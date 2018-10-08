@@ -18,7 +18,7 @@ namespace arkanoid
             this.canvas = c;
             img = new Image();
             img.Source = new BitmapImage(new System.Uri(Location + "Brick 1.jpg"));
-            img.Width = 35;
+            img.Width = 40;
             Canvas.SetTop(img, position.Y);
             Canvas.SetLeft(img, position.X);
             canvas.Children.Add(img);
