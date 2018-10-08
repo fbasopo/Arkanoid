@@ -21,7 +21,6 @@ namespace arkanoid.Properties
     /// </summary>
     public partial class Welcome : Window
     {
-
         DispatcherTimer go;
         Properties.Menu_Bar tm;
         
@@ -33,10 +32,9 @@ namespace arkanoid.Properties
             go = new DispatcherTimer();
             go.Interval = TimeSpan.FromSeconds(7);
             go.IsEnabled = true;
-            go.Tick += Tino_Tick;
+            go.Tick += Window_Timer;
         }
-       
-        private void Tino_Tick(object sender, EventArgs e)
+        private void Window_Timer(object sender, EventArgs e)
         {
             tm = new Menu_Bar();
             tm.Show();

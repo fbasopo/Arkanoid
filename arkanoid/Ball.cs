@@ -8,9 +8,8 @@ namespace arkanoid
     class Ball
     {
         //Game theGame;
-        double velX = 1, velY = 1;   // initialised velocities for the ball
+        double velX = 4, velY = 4;   // initialised velocities for the ball
         Image img;
-        
         // img represents the ball
         //This is to check whether the ball is within the canvas
         //Canvas canvasP;
@@ -29,7 +28,6 @@ namespace arkanoid
             Point bbl = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
             return bbl;
         }
-
         public Point BottomRight()
         {
             Point ballS = new Point(Canvas.GetLeft(img) + img.ActualWidth, Canvas.GetTop(img) + img.ActualHeight);
@@ -71,11 +69,7 @@ namespace arkanoid
             moveX(canvas);                    //method in the ball class to move the ball horizontally
             moveY(canvas);                    //method in the ball class to movethe ball vertically
         }
-
-        public void ReverseCourse() {
-            velX = velX * -1;
-            velY *= -1;
-        }
+        
         public void ReverseX()
         {
             velX *= -1;
@@ -98,13 +92,8 @@ namespace arkanoid
         {
             Canvas.SetTop(img, p.Y - img.ActualWidth - 1);
             velY = -velY;
-
         }
-
-       
-       
     }
-
 }
     
 

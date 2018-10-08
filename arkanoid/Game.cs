@@ -31,8 +31,6 @@ namespace arkanoid
         {
             return p.X >= topLeft.X && p.X <= bottomRight.X && p.Y <= bottomRight.Y && p.Y >= topLeft.Y;
         }
-        
-
         public void  Brickcollision() 
         {
             List<Point> ballPoints = new List<Point>();
@@ -48,7 +46,6 @@ namespace arkanoid
                 {
                     if (BrickPointCollision(p, b.TopLeft(), b.BottomRight()))
                     {
-                        
                         intersected = b;
                         if (ball.TopLeft().X == b.TopRight().X || ball.TopRight().X == b.TopLeft().X)
                         {
@@ -94,7 +91,7 @@ namespace arkanoid
                 }
             }
         }
-
+       
         public Game(TheBoard board, Ball ball, List<Brick> list)
         {
             this.bricks = list;

@@ -57,13 +57,11 @@ namespace arkanoid
             }
             return false;
         }
-
         public Point Position()
         {
-            Point f = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
             //Ball.bounce(f);
+            Point f = new Point(Canvas.GetLeft(img), Canvas.GetTop(img));
             return f;
-
         }
     }
 }

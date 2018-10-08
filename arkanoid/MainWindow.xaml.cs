@@ -28,7 +28,6 @@ namespace arkanoid
 
     public partial class MainWindow : Window
     {
-
         arkanoid.Properties.Welcome welcome;
         private BitmapImage[] OverImages;
         private string Location = "pack://application:,,,/";
@@ -42,16 +41,10 @@ namespace arkanoid
 
         public MainWindow()
         {
-            //sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\music.wav");
-            //sp.Play();
-            //playground = new Canvas();
             InitializeComponent();
-            
             welcome = new Properties.Welcome();
             welcome.Show();
             this.Hide();
-
-            
             theTimer.Interval = TimeSpan.FromMilliseconds(10);
             theTimer.Tick += dispatcherTimer_Tick;
             theTimer.IsEnabled = true;
@@ -61,7 +54,8 @@ namespace arkanoid
             theGame = new Game(board, theBall, bricks);
             double pad = canvas.ActualHeight - (paddle.ActualHeight + 20);
             Canvas.SetBottom(paddle, pad);
-            makeBricks(13, 4);
+            //makes bricks
+            makeBricks(16, 4);
             
         }
 
@@ -74,13 +68,12 @@ namespace arkanoid
         }
         public void makeBricks(int number, int colunm) 
         {
-
             int row = 10;
             int col = 30;
             for (int i = 0; i < number; i++)
             {
                 bricks.Add(new Brick(canvas, new Point(row, col)));
-                row += 60;
+                row += 50;
             }
             if(colunm > 1)
             {
@@ -92,11 +85,19 @@ namespace arkanoid
                     for (int b = 0; b < number; b++)
                     {
                         bricks.Add(new Brick(canvas, new Point(row, col)));
-                        row += 60;
+                        row += 50;
                     }
                     row = 10;
                 }
             }
+        }
+        public bool checkwin()
+        {
+            if (bricks.Count == 0)
+            {
+                return true;
+            }
+            return false;
         }
         public void stop()                  // the method to stop the timer
         {
@@ -122,22 +123,23 @@ namespace arkanoid
                     OverImages = new BitmapImage[] { new BitmapImage(new Uri(Location + "Over1.png")) };
                     Over.Source = OverImages[0];
                 }
-                
+                if (checkwin())
+                {
+                    stop();
+                    OverImages = new BitmapImage[] { new BitmapImage(new Uri(Location + "youwin.png")) };
+                    Over.Source = OverImages[0];
+                }
             }
-            
         } // dispatcherTimer_Tick
         private void makeBounceSound()
         {
-            //Uri pathToFile = new Uri(Directory.GetCurrentDirectory()+@"\bounce2.wav");
-            //StreamResourceInfo strm = Application.GetResourceStream(pathToFile);
             SoundPlayer sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\bounce3.wav");
             sp.Play();
         }
         private void paddle_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            board.Activate();
-            
             // actives the board with the mouse
+            board.Activate();
         }
 
         private void paddle_MouseMove(object sender, MouseEventArgs e)
@@ -145,8 +147,6 @@ namespace arkanoid
             board.move(canvas);               // moves the board
             checkboard = true;
         }
-
-
     }//class Mainwindow
 }
     
