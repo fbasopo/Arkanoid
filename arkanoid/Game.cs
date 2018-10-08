@@ -15,7 +15,7 @@ namespace arkanoid
         Canvas canvas;
         //Canvas canvas;
         //double velY = 15, velX = 15;
-        public void checkcollision()
+        public bool checkcollision()
         {
             Point ballpos = ball.BottomLeft();
             Point balYps = ball.BottomRight();
@@ -23,9 +23,9 @@ namespace arkanoid
             if (board.IntersectsWith(ballpos, balYps))
             {
                 ball.bounce(board.Position());
-                
+                return true;
             }
-            
+            return false;
         }
         private bool BrickPointCollision(Point p, Point topLeft, Point bottomRight)  // for the top and bottom
         {

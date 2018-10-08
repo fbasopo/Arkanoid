@@ -108,7 +108,11 @@ namespace arkanoid
             if (checkboard)
             {
                 theBall.update(canvas);
-                theGame.checkcollision();       // calls the method in the ball class to make the ball bounce
+                bool checkforsound = theGame.checkcollision();       // calls the method in the ball class to make the ball bounce
+                if (checkforsound)
+                {
+                    makeBounceSound();
+                }
                 theGame.Brickcollision();
                 // if it reaches the bottom of the canvas, display the image and stop
                 if (theBall.LeavesArea(canvas))
@@ -117,19 +121,18 @@ namespace arkanoid
                     stop();
                     OverImages = new BitmapImage[] { new BitmapImage(new Uri(Location + "Over1.png")) };
                     Over.Source = OverImages[0];
-                    
                 }
                 
             }
             
         } // dispatcherTimer_Tick
-        //private void makeBounceSound()
-        //{
-        //    Uri pathToFile = new Uri("pack://application:,,,/bounce.wav");
-        //    StreamResourceInfo strm = Application.GetResourceStream(pathToFile);
-        //    SoundPlayer sp = new SoundPlayer(strm.Stream);
-        //    sp.Play();
-        //}
+        private void makeBounceSound()
+        {
+            //Uri pathToFile = new Uri(Directory.GetCurrentDirectory()+@"\bounce2.wav");
+            //StreamResourceInfo strm = Application.GetResourceStream(pathToFile);
+            SoundPlayer sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\bounce3.wav");
+            sp.Play();
+        }
         private void paddle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             board.Activate();

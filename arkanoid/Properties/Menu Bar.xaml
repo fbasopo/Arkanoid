@@ -10,9 +10,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="Welcome2.jpg"/>
         </Grid.Background>
-        <Button x:Name="Play_Button" Content="Play" HorizontalAlignment="Left" Margin="314,132,0,0" VerticalAlignment="Top" Width="206" Height="55" Click="Play_Button_Click"/>
-        <Button x:Name="Sound_Button" Content="Sound On" HorizontalAlignment="Left" Margin="314,208,0,0" VerticalAlignment="Top" Width="206" Height="55" Click="Sound_Button_Click"/>
-        <Button x:Name="exit_btn" Content="Exit" HorizontalAlignment="Left" Margin="314,282,0,0" VerticalAlignment="Top" Width="206" Height="57" FontFamily="Segoe UI Black" FontSize="36"/>
+        <Button x:Name="Play_Button" Content="Play" HorizontalAlignment="Left" Margin="314,132,0,0" VerticalAlignment="Top" Width="206" Height="55" Click="Play_Button_Click" FontFamily="Segoe UI Black" FontSize="36"/>
+        <Button x:Name="Sound_Button" Content="Sound On" HorizontalAlignment="Left" Margin="314,208,0,0" VerticalAlignment="Top" Width="206" Height="55" Click="Sound_Button_Click" FontFamily="Segoe UI Black" FontSize="36"/>
+        <Button x:Name="exit_btn" Content="Exit" HorizontalAlignment="Left" Margin="314,282,0,0" VerticalAlignment="Top" Width="206" Height="57" FontFamily="Segoe UI Black" FontSize="36" Click="exit_btn_Click"/>
 
     </Grid>
 </Window>

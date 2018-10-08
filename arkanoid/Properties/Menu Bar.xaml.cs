@@ -46,8 +46,11 @@ namespace arkanoid.Properties
                 case 0: Sound_Button.Content = x[1]; m = 1 ; sp.Stop(); break;
                 case 1: Sound_Button.Content = x[0]; m = 0; sp.PlayLooping(); break;
             }
-            
-            
+        }
+
+        private void exit_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
