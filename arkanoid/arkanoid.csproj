@@ -135,5 +135,11 @@
   <ItemGroup>
     <Resource Include="Properties\Welcome2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Main Menu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Start.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

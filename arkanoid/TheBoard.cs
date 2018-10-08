@@ -25,11 +25,12 @@ namespace arkanoid
         bool activate = false;    // initialise the activate of the mouse
         Point point;
         
-        public void Activate()
+        public bool Activate()
         {
             activate = true;
             point = Mouse.GetPosition(img);    // mouse must get the position of the img
             Mouse.Capture(img);                // the mouse must capture the position of the image
+            return true;
         }
 
         public void move(Canvas canvas)

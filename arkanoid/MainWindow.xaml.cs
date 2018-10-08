@@ -28,6 +28,8 @@ namespace arkanoid
 
     public partial class MainWindow : Window
     {
+
+        arkanoid.Properties.Welcome welcome;
         private BitmapImage[] OverImages;
         private string Location = "pack://application:,,,/";
         DispatcherTimer theTimer = new DispatcherTimer();
@@ -36,15 +38,20 @@ namespace arkanoid
         TheBoard board;
         Game theGame;
         List<Brick> bricks;
-        SoundPlayer sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\music.wav");
-        
+        bool checkboard = false;
+
         public MainWindow()
         {
+            //sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\music.wav");
+            //sp.Play();
             //playground = new Canvas();
             InitializeComponent();
-            //GameSound();
-            //SoundPlayer sp = new SoundPlayer(Directory.GetCurrentDirectory() + @"\music.wav");
-            sp.PlayLooping();
+            
+            welcome = new Properties.Welcome();
+            welcome.Show();
+            this.Hide();
+
+            
             theTimer.Interval = TimeSpan.FromMilliseconds(10);
             theTimer.Tick += dispatcherTimer_Tick;
             theTimer.IsEnabled = true;
@@ -58,11 +65,13 @@ namespace arkanoid
             
         }
 
-        //private void GameSound()
-        //{
-           
-        //}
-        
+        public void removeBricks()
+        {
+            foreach(Brick i in bricks)
+            {
+                i.removebrick();
+            }
+        }
         public void makeBricks(int number, int colunm) 
         {
 
@@ -96,17 +105,22 @@ namespace arkanoid
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             //GameSound();
-            theBall.update(canvas);                          // 
-            theGame.checkcollision();       // calls the method in the ball class to make the ball bounce
-            // if it reaches the bottom of the canvas, display the image and stop
-            if (theBall.LeavesArea(canvas))
+            if (checkboard)
             {
-                OverImages = new BitmapImage[] { new BitmapImage(new Uri(Location + "Over1.png")) };
-                Over.Source = OverImages[0];
-                stop();
-                sp.Stop();
+                theBall.update(canvas);
+                theGame.checkcollision();       // calls the method in the ball class to make the ball bounce
+                theGame.Brickcollision();
+                // if it reaches the bottom of the canvas, display the image and stop
+                if (theBall.LeavesArea(canvas))
+                {
+                    removeBricks();
+                    stop();
+                    OverImages = new BitmapImage[] { new BitmapImage(new Uri(Location + "Over1.png")) };
+                    Over.Source = OverImages[0];
+                    
+                }
+                
             }
-            theGame.Brickcollision();
             
         } // dispatcherTimer_Tick
         //private void makeBounceSound()
@@ -118,12 +132,15 @@ namespace arkanoid
         //}
         private void paddle_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            board.Activate();                   // actives the board with the mouse
+            board.Activate();
+            
+            // actives the board with the mouse
         }
 
         private void paddle_MouseMove(object sender, MouseEventArgs e)
         {
             board.move(canvas);               // moves the board
+            checkboard = true;
         }
 
 
