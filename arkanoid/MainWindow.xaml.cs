@@ -42,6 +42,7 @@ namespace arkanoid
         public MainWindow()
         {
             InitializeComponent();
+            ExitLabel.Visibility = Visibility.Hidden;
             welcome = new Properties.Welcome();
             welcome.Show();
             this.Hide();
@@ -122,6 +123,7 @@ namespace arkanoid
                     stop();
                     OverImages = new BitmapImage[] { new BitmapImage(new Uri(Location + "Over1.png")) };
                     Over.Source = OverImages[0];
+                    ExitLabel.Visibility = Visibility.Visible;
                 }
                 if (checkwin())
                 {
@@ -146,6 +148,16 @@ namespace arkanoid
         {
             board.move(canvas);               // moves the board
             checkboard = true;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Space: System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    break;
+                default: break;
+            }
         }
     }//class Mainwindow
 }
